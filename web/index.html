@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>心理測驗</title>
+  <style>
+    body {
+      background-image: url('image/castle.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: 36px;
+    }
+    
+    .options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .option {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 30px;
+      text-align: center;
+      border: 2px solid #000;
+    }
+    
+    .option img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      display: block;
+      margin: 0 auto;
+      object-fit: cover;
+      object-position: center;
+      max-height: 200px;
+    }
+    
+    .option p {
+      margin-top: 10px;
+    }
+    
+    .fog {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('image/fog.jpg');
+      background-repeat: repeat;
+      background-position: center;
+      animation: fogAnimation 8s ease-in-out infinite;
+      z-index: 0;
+    }
+    
+    @keyframes fogAnimation {
+      0% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="fog"></div>
+  <div class="content">
+    <h1>在你心目中，一個理想的白馬王子應該是...</h1>
+    <div class="options">
+      <div class="option">
+        <img src="image/adventurer.png" alt="冒險家">
+        <p>冒險家<br>喜歡挑戰和新奇事物</p>
+      </div>
+      <div class="option">
+        <img src="image/reliable.png" alt="穩重可靠">
+        <p>穩重可靠<br>給人安全感</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+document.getElementsByClassName('option')
+
+</script>
+</html>
