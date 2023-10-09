@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居中的视频</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* 设置背景颜色 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* 垂直居中时设置为列布局 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 使内容在视窗垂直居中 */
+        }
+
+        h1 {
+            font-size: 24px; /* 设置标题字体大小 */
+            margin-bottom: 20px; /* 设置标题与iframe的间距 */
+        }
+
+        iframe {
+            width: 80%; /* 设置iframe宽度 */
+            height: 60vh; /* 设置iframe高度 */
+            border: none;
+            background-color: white; /* 设置iframe背景颜色 */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+    </style>
+</head>
+<body>
+    <h1>妳的白馬王子即將出現</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/hh5eZ5tocrw?si=4RjcrOKa-tAnnGLv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</body>
+</html>
