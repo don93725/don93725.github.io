@@ -5,7 +5,7 @@
   <title>心理測驗</title>
   <style>
     body {
-      background-image: url('image/castle.jpg');
+      background-image: url('image/1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -38,6 +38,11 @@
       margin-top: 20px;
     }
     
+    .option:hover {
+      /*border: 5px solid #fff719;*/
+      background-color: #fff719;
+    }
+
     .option {
       flex: 1;
       padding: 10px;
@@ -46,10 +51,13 @@
       margin-top: 30px;
       text-align: center;
       border: 2px solid #000;
+      font-weight: bold;
+      font-size: 22px;
     }
     
     .option img {
-      max-width: 100%;
+      max-height: 100%;
+      max-width: auto;
       height: auto;
       border-radius: 5px;
       display: block;
@@ -92,21 +100,78 @@
 <body>
   <div class="fog"></div>
   <div class="content">
-    <h1>在你心目中，一個理想的白馬王子應該是...</h1>
+    <h1 id="title">在你心目中，一個理想的白馬王子應該是...</h1>
     <div class="options">
-      <div class="option">
-        <img src="image/adventurer.png" alt="冒險家">
+      <div id="option1" class="option">
+        <img src="image/1_1.png" alt="冒險家">
         <p>冒險家<br>喜歡挑戰和新奇事物</p>
       </div>
-      <div class="option">
-        <img src="image/reliable.png" alt="穩重可靠">
+      <div id="option2" class="option">
+        <img src="image/1_2.png" alt="穩重可靠">
         <p>穩重可靠<br>給人安全感</p>
       </div>
     </div>
   </div>
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
 <script>
-document.getElementsByClassName('option')
+  var problems = [];
+  problems.push(buildProblem(`在你心目中，一個理想的白馬王子應該是...`,`冒險家<br>喜歡挑戰和新奇事物`,`穩重可靠<br>給人安全感`,'image/1_1.png','image/1_2.png','image/1.jpg'));
+problems.push(buildProblem(`對你來說哪一項比較重要？`,`內在`,`外表`,'image/2_1.png','image/2_2.png','image/2.jpg'));
+problems.push(buildProblem(`當你遇到困難時，你希望你的伴侶是...`,`機智幽默<br>能帶給你歡樂和開心`,`成熟穩重<br>能給你支持和指導`,'image/3_1.jpeg','image/3_2.jpeg','image/3.jpg'));
+problems.push(buildProblem(`哪一種運動型的男生讓你最喜歡？`,`打籃球<br>但球技一般`,`會健身<br>但身材普通`,'image/4_1.jpg','image/4_2.jpg','image/4.jpg'));
+problems.push(buildProblem(`在生活中，你更希望你的伴侶是...`,`自由自在<br>不受拘束`,`有責任感<br>願意為你和未來共同努力`,'image/5_1.png','image/5_2.png','image/5.jpg'));
+problems.push(buildProblem(`伴侶如果願意為你做什麼事情妳會很感動？`,`搬海邊的石頭`,`為妳做卡片`,'image/6_1.jpeg','image/6_2.jpeg','image/6.jpg'));
+problems.push(buildProblem(`如果你的伴侶要帶你去一個地方度假，你更希望是...`,`城市冒險之旅`,`海灘渡假勝地`,'image/7_1.jpeg','image/7_2.jpeg','image/7.jpg'));
+problems.push(buildProblem(`你期望你的伴侶對你的愛情表達方式是...`,`浪漫溫柔<br>經常給你驚喜和甜蜜`,`誠實直接<br>對你坦白並表達真實感受`,'image/8_1.jpg','image/8_2.jpg','image/8.jpg'));
+problems.push(buildProblem(`伴侶哪種飲食習慣最讓妳滿意？`,`不喜歡吃小黃瓜`,`喜歡吃紅蘿蔔`,'image/9_1.jpg','image/9_2.jpg','image/9.jpg'));
+problems.push(buildProblem(`哪種巧合最讓你心動？`,`常用的置物櫃選到同一個號碼`,`你想吃巧克力時，突然送給你`,'image/10_1.jpeg','image/10_2.jpeg','image/10.jpg'));
+problems.push(buildProblem(`怎樣會讓你跟對方產生革命情感？`,`一起半夜搶場<br>成為搶搶夥伴`,`颱風剛走時<br>一起沒吃暈船藥坐船`,'image/11_1.jpeg','image/11_2.jpeg','image/11.jpg'));
+  $(function(){
+    let page = getUrlParameter("page");
+    if (!page.length) {
+      page = 0;
+    }
+    renderWeb(page);
+  });
 
+  function buildProblem(q, ans1, ans2, ansPic1, ansPic2, bgPic){
+    var obj = {};
+    obj.q = q;
+    obj.ans1 = ans1;
+    obj.ans2 = ans2;
+    obj.ansPic1 = ansPic1;
+    obj.ansPic2 = ansPic2;
+    obj.bgPic = bgPic;
+    return obj;
+  }
+
+  function renderWeb(page) {
+    let problem = problems[page];
+    $("#title").html(problem.q);
+    $("#option1").html(buildOptionHtml(problem.ans1, problem.ansPic1, page));
+    $("#option2").html(buildOptionHtml(problem.ans2, problem.ansPic2, page));
+    $('body').css('background-image', `url('${problem.bgPic}')`)
+  }
+
+  function buildOptionHtml(text, picUrl, page) {
+    let nextPage = parseInt(page) + 1;
+    let url = `?page=${nextPage}`;
+    if (nextPage == problems.length) {
+      url = "./res.html";
+    }
+    let html = `<img src="${picUrl}" onclick="location.href='${url}'"><p>${text}</p>`;
+    return html;
+  }
+
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
 </script>
 </html>
